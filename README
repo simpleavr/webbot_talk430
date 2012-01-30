@@ -1,0 +1,30 @@
+
+this is a perl script to convert the webbotlib speech sythesizer code from avr
+to msp430 usage. this script is use at your own risk giftware. webbotlib has
+it's own license terms.
+
+. locate "webbotlib" and download version 1.x, i tried w/ webbotavrclib-1.35
+. inside the package locate and extract the Audio/Text2Speech directory
+. u will see the following files
+
+Text2Speech.h
+phoneme2sound.c
+phonemeWriter.c
+sound2noise.c
+speech2phoneme.c
+speechWriter.c
+vocab_en.c
+
+. place these files in a same directory as this (zconv.pl) script
+. run it again and this script will
+  . extract what's needed, ignore others
+  . combine into a tighter package name "../webbot_speech.h"
+  . replace avr controls w/ msp430 controls
+. to use it in your firmware, do
+  . include "webbot_speech.h"
+  . say("Hello World");
+  . enjoy :) and thanks webbot
+
+<<< IMPORTANT >>>
+please observe the fact that webbotlib is GPL licensed and use / share accordingly
+
