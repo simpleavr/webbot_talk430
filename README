@@ -3,7 +3,7 @@ this is a perl script to convert the webbotlib speech sythesizer code from avr
 to msp430 usage. this script is use at your own risk giftware. webbotlib has
 it's own license terms.
 
-. locate "webbotlib" and download version 1.x, i tried w/ webbotavrclib-1.35
+. locate "webbotlib" and download version 2.x, i tried w/ webbotavrclib-1.35
 . inside the package locate and extract the Audio/Text2Speech directory
 . u will see the following files
 
@@ -24,6 +24,17 @@ vocab_en.c
   . include "webbot_speech.h"
   . say("Hello World");
   . enjoy :) and thanks webbot
+
+2012.10.24 change log
+
+. webbot_lib.h now reside in same directory
+. now uses webbotlib package 2.x versions
+. now compiles under CCS
+. adopt to new mspgcc
+  . mspgcc-20120406-p20120502
+  . use of #include <legacymsp430.h>
+  . retire own intrinsic __delay_cycle(), now uses mspgcc's
+  . adopt to newer interrupt naming convention
 
 <<< IMPORTANT >>>
 please observe the fact that webbotlib is GPL licensed and use / share accordingly
