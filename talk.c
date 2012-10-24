@@ -1,17 +1,21 @@
-#include <signal.h>
+#include <msp430.h>
+
+#ifdef MSP430
+	#include <legacymsp430.h>
+#endif
+
 #include <stdint.h>
 #include <stdio.h>
 //  November 2011
 //  code provided as is, no warranty
+//  October 2012
+//  . adopt newer mspgcc
+//  . new compiles under CCS
 //
 //
 /*
-  the following is the most basic schematic on a 2k device, i use a F2012 but it will work fine w/ the
-  G2231/G2211 that comes w/ the launchpad. this can be breadboarded w/o too much trouble
-  you can have different layouts / pin mappings or different devices. we just need enough io pins for
-  2 spi interfaces (some pins can be shared) and a timerA
                                                                          
-               MSP430F2012         ----------+---------------       ----
+               MSP430G2553         ----------+---------------       ----
              -----------------     |         |              |      /    \
          /|\|              XIN|-   |        ---             |      |    |
           | |                 |   .-.       --- 10-500nF    o      \    /
@@ -28,7 +32,7 @@
 #define MHZ     8
 
 //#define G2231
-//#define G2452
+//#define G2452 *** must use G2553, it won't fit on 8k devices
 #define G2553
 
 
@@ -38,7 +42,8 @@
 #define TRUE	1
 #define FALSE	0
 
-//#include "core.h"
+#define FILE	int
+
 #include "webbot_speech.h"
 
 const char quick[] = "the quick brown fox jump over the lazy dog";
@@ -107,10 +112,10 @@ int main() {
 
 //______________________________________________________________________
 #ifdef MSP430
-interrupt(TIMERA0_VECTOR) TIMERA0_ISR(void)
+interrupt(TIMER0_A0_VECTOR) TIMER0_A0_ISR(void)
 #else
-#pragma vector=TIMERA0_VECTOR
-__interrupt void TIMERA0_ISR(void)
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void TIMER0_A0_ISR(void)
 #endif
 {
 	uart_timera0_isr();
