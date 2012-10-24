@@ -31,29 +31,6 @@ DCOCTL  = CALDCO_##x##MHZ;
 			led_off(); for (i=0;i<100;i++) __delay_cycles(1000*USEC);	\
 		} while (x)
 
-//______________________________________________________________________
-#ifdef MSP430		// tells us we are using mspgcc
-
-#ifdef G2231
-#include <msp430x20x2.h>
-#endif
-#ifdef G2452
-#include <msp430x21x1.h>
-#endif
-#ifdef G2553
-#include <msp430x22x2.h>
-#endif
-
-static void __inline__ __delay_cycles(register uint16_t n) {
-    __asm__ __volatile__ (
-                "1: \n"
-                " dec      %[n] \n"
-                " jne      1b \n"
-        : [n] "+r"(n));
-
-}
-#else
-
 #ifdef G2231
 #include <msp430g2231.h>
 #endif
@@ -69,9 +46,4 @@ static void __inline__ __delay_cycles(register uint16_t n) {
 #define TASSEL__SMCLK	TASSEL_2
 #define MC__UP			MC_1 
 
-typedef unsigned char	uint8_t;
-typedef unsigned int	uint16_t;
-typedef int  			int16_t;
-
-#endif
 #endif
